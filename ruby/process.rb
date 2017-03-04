@@ -1,4 +1,5 @@
 require 'htmlentities'
+require 'yaml'
 
 # This file handles ruby-side processing of a single mention
 # Ideally it is the only file that will need to be modified
@@ -66,13 +67,15 @@ end
 def lua_to_temp_gif(lua)
 	raise 'block required' unless block_given?
 
-	lua_location = 'tweetcart.raw.lua'
-	gif_location = 'tweetcart.gif'
+	# TODO: Parameterize?
+	shared_config = YAML.load_file('./config.yml')
+	lua_location = shared_config['record_input']
+	gif_location = shared_config['record_output']
 	# Dump the cart to `tweetcart.raw.lua`
 	File.open(lua_location, 'w') { |f| f.write(lua) }
 
 	# Await the saving grace of the magic
-	`./gif_it.sh "#{lua_location}" "#{gif_location}"`
+	`./recordpico8.bash`
 
 	# Read the file and hopefully tweet it.
 	File.open(gif_location, 'r') { |gif| yield(gif) }

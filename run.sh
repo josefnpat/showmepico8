@@ -46,7 +46,7 @@ echo "Running and recording pico8"
 $pico -gif_scale 4 -windowed 1 -run $workingdir/$cartpath/$output &
 sleep 5.5
 xdotool key F8
-sleep 8
+sleep 6
 xdotool key F9
 sleep 1
 pkill -9 pico8

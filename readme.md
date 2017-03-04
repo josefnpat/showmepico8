@@ -11,4 +11,4 @@ These scripts require:
 * gem bundle
 * imagemagick
 * pico8
-* jq
+* awk

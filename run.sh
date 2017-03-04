@@ -1,5 +1,5 @@
 #!/bin/sh
-pico=/root/pico-8/pico8
+pico=/home/lemtzas/Dropbox/dev/2016/pico-8/pico-8/pico8_stdout_hack
 cartpath=carts
 workingdir=/root/.lexaloffle/pico-8
 code=pico8code.p8

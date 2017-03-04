@@ -4,11 +4,13 @@
 # @param watcher: The Watcher that called you.
 # watcher.username is the user.screen_name equivalent
 # watcher.client is http://www.rubydoc.info/gems/twitter/Twitter/REST/Client
+# see `test_lua_to_temp_gif` for lua rendering test information
 def handle_one_tweet(mention, watcher)
 	target_tweet = discern_target_tweet(mention, watcher)
 	lua = tweet_to_lua(target_tweet, watcher)
-	gif = lua_to_gif_io(lua)
-	reply_with_gif_or_sadness(mention, watcher, gif)
+	lua_to_temp_gif(lua) do |gif|
+		reply_with_gif_or_sadness(mention, watcher, gif)
+	end
 end
 
 # Constructs the tagging string with all relevant usernames
@@ -59,6 +61,39 @@ def tweet_to_lua(target_tweet, watcher)
 end
 
 # Turns lua into a streamable file handle
-def lua_to_gif_io(lua)
-	nil # binding.pry
+def lua_to_temp_gif(lua)
+	raise 'block required' unless block_given?
+
+	lua_location = 'tweetcart.raw.lua'
+	gif_location = 'tweetcart.gif'
+	# Dump the cart to `tweetcart.raw.lua`
+	File.open(lua_location, 'w') { |f| f.write(lua) }
+
+	# Await the saving grace of the magic
+	`./gif_it.sh "#{lua_location}" "#{gif_location}"`
+
+	# Read the file and hopefully tweet it.
+	File.open(gif_location, 'r') { |gif| yield(gif) }
+
+	# PURGE
+	File.delete(gif_location)
+	File.delete(lua_location)
 end
+
+# This will test just the giffing
+# run `gem install bundler`
+# run `bundle install`
+# run `bundle exec ruby ruby/process.rb`
+def test_lua_to_temp_gif
+	require 't'
+
+	lua = <<-LUA_CODE
+print("hello world")
+LUA_CODE
+
+	lua_to_temp_gif(lua) do |gif|
+  	raise(Twitter::Error::UnacceptableIO.new) unless gif.respond_to?(:to_io)
+	end
+end
+
+test_lua_to_temp_gif

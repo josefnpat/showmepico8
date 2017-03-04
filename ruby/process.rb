@@ -34,7 +34,7 @@ def reply_with_gif_or_sadness(mention, watcher, gif)
 
 	if gif
 		status = "🤘 #{tagging_text}"
-		watcher.client.update_with_media(status, media_stream, in_reply_to_status: mention)
+		watcher.client.update_with_media(status, gif, in_reply_to_status: mention)
 	else
 		status = "#{tagging_text} :( it went boom"
 		watcher.client.update(status, in_reply_to_status: mention)

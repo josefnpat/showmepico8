@@ -1,3 +1,5 @@
+require 'htmlentities'
+
 # This file handles ruby-side processing of a single mention
 # Ideally it is the only file that will need to be modified
 # @param mention: The Twitter::Tweet that is mentioning you. http://www.rubydoc.info/gems/twitter/Twitter/Tweet

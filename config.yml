@@ -1,0 +1,5 @@
+pico: /root/pico-8/pico8
+pico8gifoutputdir: /root/Desktop
+record_input: /tmp/body.p8
+record_output: /tmp/PICO8_0_pad.gif
+record_tmpdir: /tmp/showmepico8

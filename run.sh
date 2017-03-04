@@ -14,7 +14,7 @@ tmpcsvparent=/tmp/tweetcsvparent
 lasttweetidf=/root/.lasttweetid
 lasttweetid=`cat $lasttweetidf`
 
-t mentions -n 1 --csv > $tmpcsv
+t mentions -n 1 --csv | head -n2 > $tmpcsv
 
 tweetid=`cut -d , -f 1 $tmpcsv | tail -1`
 tweetuser=`cut -d , -f 3 $tmpcsv | tail -1`

@@ -1,9 +1,21 @@
-require './ruby/TUtilities/connect'
+require './ruby/TUtilities/watcher'
+require './ruby/process'
+require 'pry-byebug'
 
-client = ::TUtilities::Connect.connect_with_t
+SECONDS_BETWEEN_REQUESTS = 25
 
-require 'pry-byebug';binding.pry
-puts 'break'
+watcher = ::TUtilities::TMentionWatcher.new
+
+loop do
+	puts "Making request @ #{Time.now}"
+	target_time = Time.now + SECONDS_BETWEEN_REQUESTS
+
+	watcher.look do |mention, client|
+		handle_one_tweet(mention, client)
+	end
+
+	sleep(target_time - Time.now) if target_time > Time.now
+end
 
 # client = Twitter::REST::Client.new do |c|
 # 	c.consumer_key        = profile_data['consumer_key']

@@ -4,3 +4,7 @@ Style/IndentationWidth:
   Width: 1
 Metrics/MethodLength:
   Max: 30
+Metrics/LineLength:
+  Max: 120
+Style/MultilineMethodCallIndentation:
+  Enabled: false

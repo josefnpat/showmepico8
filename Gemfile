@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'twitter', '~> 6.1'
+gem 't', '~> 3.1.0'
 
 group :dev do
 	gem 'pry-byebug'

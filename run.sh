@@ -58,4 +58,3 @@ convert $gifoutput -background black -gravity Center -extent 560x560 -layers Opt
 echo "Responding to tweet"
 
 t reply -a $tweetid -f "$gifoutputim" "pico8 🤘"
-

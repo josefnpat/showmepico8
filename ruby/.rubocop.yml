@@ -8,3 +8,5 @@ Metrics/LineLength:
   Max: 120
 Style/MultilineMethodCallIndentation:
   Enabled: false
+Style/RaiseArgs:
+  Enabled: false

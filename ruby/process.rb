@@ -59,7 +59,7 @@ def discern_target_tweet(mention, watcher)
 end
 
 # Gets lua from the tweet.
-def tweet_to_lua(target_tweet, watcher)
+def tweet_to_lua(target_tweet, _watcher)
 	target_tweet.text
 end
 
@@ -97,7 +97,7 @@ print("hello world")
 LUA_CODE
 
 	lua_to_temp_gif(lua) do |gif|
-  	raise(Twitter::Error::UnacceptableIO.new) unless gif.respond_to?(:to_io)
+		raise(Twitter::Error::UnacceptableIO.new) unless gif.respond_to?(:to_io)
 	end
 end
 

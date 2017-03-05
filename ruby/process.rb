@@ -20,7 +20,7 @@ end
 # If this is not done, it will be posted as a non-reply status.
 def build_tagging_text(mention, watcher)
 	mentioned_users = mention.user_mentions.map(&:screen_name)
-	mentioned_users.push mention.user.screen_name
+	mentioned_users.push(mention.user.screen_name)
 	mentioned_users.delete(watcher.username)
 	mentioned_users.map! { |screen_name| '@' + screen_name }
 	mentioned_users.join(' ')

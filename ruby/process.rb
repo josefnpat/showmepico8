@@ -101,4 +101,5 @@ LUA_CODE
 	end
 end
 
-test_lua_to_temp_gif
+# Run the test script if executing this file directly
+test_lua_to_temp_gif if __FILE__ == $PROGRAM_NAME

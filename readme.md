@@ -11,8 +11,8 @@ These scripts require:
 * imagemagick
 * awk
 * ruby-dev
-* xdotool
 * Ruby gems: t htmlentities yaml pry-byebug (use bundle)
+* xdotool
 * pico8
 
 ## VM Config

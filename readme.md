@@ -10,8 +10,9 @@ These scripts require:
 * bash
 * imagemagick
 * awk
-* ruby-dev
+* ruby-dev (and g++,gcc,make for gem deps)
 * Ruby gems: t htmlentities yaml pry-byebug (use bundle)
+* xorg
 * xdotool
 * pico8
 

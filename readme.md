@@ -28,7 +28,7 @@ How to set up the VM that is being used:
   * Optional: `apt-get install tig vim openssh-server sudo`
 5. (optional) Configure virtualbox to forward port 2222 from your host machine to your guest machine, so you can ssh in via putty/cygwin. This makes working with the VM easier IMO.
   * [![http://i.imgur.com/g7RIxAG.png](http://i.imgur.com/g7RIxAGt.png)](http://i.imgur.com/g7RIxAG.png) Hack into the matrix with `ssh -p2222 showmepico8@localhost`
-6. Clone the git repo (I used `/root/repos/showmepico8/, dotdata should be at `/root/repos/showmepico8/.git`)
+6. Clone the git repo (I used `/root/repos/showmepico8/`, dotdata should be at `/root/repos/showmepico8/.git`)
 7. Download and unpack pico8 into the correct location (`/root/pico-8/`, bin should be at `/root/pico-8/pico8`)
 8. Use the ruby gem `bundle` to install ruby deps (cd repos/showmepico8/ && `bundle install`)
 9. Run `startx` and attach a `tmux` session to the open `xterm` window (You could use `screen` too)

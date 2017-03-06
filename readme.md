@@ -4,6 +4,8 @@ The source code for the [@showmepico8](http://twitter.com/showmepico8) bot.
 
 Thanks to @lemtzas for the ruby help.
 
+## Requirements
+
 These scripts require:
 * bash
 * imagemagick
@@ -14,6 +16,8 @@ These scripts require:
 * gem htmlentities
 * gem bundle
 * pico8
+
+## VM Config
 
 How to set up the VM that is being used:
 

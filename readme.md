@@ -22,7 +22,7 @@ These scripts require:
 How to set up the VM that is being used:
 
 1. [Download and install VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-2. [Download Ubuntu 16.04 Minimal Unstall (~54MB)](http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso)
+2. [Download Ubuntu 16.04 Minimal Install (~54MB)](http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso)
 3. Set up a new machine w/ 2GB of ram, 8GB dynamic VDI, set the ubuntu iso to boot. When shown the "Installer boot menu" select "Command-line install" and install ubuntu.
 4. I installed a bunch of apps. I used: `apt-get install tig imagemagick g++ gcc make ruby-dev git xdotool tmux unzip vim openssh-server xorg `
 5. Git clone the repo, download and unpack pico8 into the correct location and use gem bundle to install ruby stuff.

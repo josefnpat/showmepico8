@@ -30,7 +30,7 @@ How to set up the VM that is being used:
   * [![http://i.imgur.com/g7RIxAG.png](http://i.imgur.com/g7RIxAGt.png)](http://i.imgur.com/g7RIxAG.png) Hack into the matrix with `ssh -p2222 showmepico8@localhost`
 6. Clone the git repo (I used `/root/repos/showmepico8/`, dotdata should be at `/root/repos/showmepico8/.git`)
 7. Download and unpack pico8 into the correct location (`/root/pico-8/`, bin should be at `/root/pico-8/pico8`)
-8. Use the ruby gem `bundle` to install ruby deps (cd repos/showmepico8/ && `bundle install`)
+8. Use the ruby gem `bundle` to install ruby deps (`cd repos/showmepico8/ && bundle install`)
 9. Run `startx` and attach a `tmux` session to the open `xterm` window (You could use `screen` too)
 10. In the term session, run the ruby application (@lemtzas please add usage instructions for start/stop/error reporting)
 11. `cd repos/showmepico8/ && bundle exec ruby ruby/process.rb` ?

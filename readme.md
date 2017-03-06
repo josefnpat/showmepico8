@@ -12,7 +12,7 @@ These scripts require:
 * awk
 * ruby-dev
 * xdotool
-* gems: t htmlentities yaml pry-byebug (use bundle)
+* Ruby gems: t htmlentities yaml pry-byebug (use bundle)
 * pico8
 
 ## VM Config

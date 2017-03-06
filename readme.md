@@ -27,7 +27,7 @@ How to set up the VM that is being used:
 
 Required: `apt-get install imagemagick g++ gcc make ruby-dev git xdotool tmux unzip xorg`
 
-Optional: `tig vim openssh-server sudo`
+Optional: `apt-get install tig vim openssh-server sudo`
 
 5. Clone the git repo (I used `/root/repos/showmepico8/, dotdata should be at `/root/repos/showmepico8/.git`)
 6. Download and unpack pico8 into the correct location (`/root/pico-8/`, bin should be at `/root/pico-8/pico8`)

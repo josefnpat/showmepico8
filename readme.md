@@ -12,9 +12,7 @@ These scripts require:
 * awk
 * ruby-dev
 * xdotool
-* gem t
-* gem htmlentities
-* gem bundle
+* gems: t htmlentities yaml pry-byebug (use bundle)
 * pico8
 
 ## VM Config
@@ -30,6 +28,9 @@ Required: `apt-get install imagemagick g++ gcc make ruby-dev git xdotool tmux un
 
 Optional: `tig vim openssh-server sudo`
 
-5. Git clone the repo, download and unpack pico8 into the correct location and use gem bundle to install ruby stuff.
-6. Run `startx` and attach a `tmux` session to the open xterm window (You could use screen too)
-7. In the term session, run the ruby application (please add instructions on how to use ruby app here)
+5. Clone the git repo (I used `/root/repos/showmepico8/, dotdata should be at `/root/repos/showmepico8/.git`)
+6. Download and unpack pico8 into the correct location (`/root/pico-8/`, bin should be at `/root/pico-8/pico8`)
+7. Use the ruby gem `bundle` to install ruby deps (cd repos/showmepico8/ && `bundle install`)
+8. Run `startx` and attach a `tmux` session to the open `xterm` window (You could use `screen` too)
+9. In the term session, run the ruby application (@lemtzas please add usage instructions for start/stop/error reporting)
+10. `cd repos/showmepico8/ && bundle exec ruby ruby/process.rb` ?

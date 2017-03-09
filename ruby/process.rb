@@ -56,7 +56,7 @@ def discern_target_tweet(mention, watcher)
 	parent = watcher.client.status(parent_id)
 
 	# The current tweet is the target if the parent is us.
-	return mention if parent.user.screen_name.casecmp(watcher.username)
+	return mention if parent.user.screen_name.downcase == watcher.username.downcase
 
 	parent
 end

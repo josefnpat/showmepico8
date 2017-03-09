@@ -10,3 +10,5 @@ Style/MultilineMethodCallIndentation:
   Enabled: false
 Style/RaiseArgs:
   Enabled: false
+Performance/Casecmp:
+  Enabled: false

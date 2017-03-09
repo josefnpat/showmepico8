@@ -4,7 +4,6 @@ GEM
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
     buftok (0.2.0)
-    byebug (9.0.6)
     coderay (1.1.1)
     domain_name (0.5.20170223)
       unf (>= 0.0.5, < 1.0.0)
@@ -34,9 +33,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (3.4.2)
-      byebug (~> 9.0)
-      pry (~> 0.10)
     public_suffix (2.0.5)
     retryable (2.0.4)
     simple_oauth (0.3.1)
@@ -70,7 +66,7 @@ PLATFORMS
 
 DEPENDENCIES
   htmlentities (~> 4.3, >= 4.3.4)
-  pry-byebug
+  pry
   t (~> 3.1.0)
 
 BUNDLED WITH

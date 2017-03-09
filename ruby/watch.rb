@@ -1,6 +1,5 @@
 require './ruby/TUtilities/watcher'
 require './ruby/process'
-require 'pry-byebug'
 
 SECONDS_BETWEEN_REQUESTS = 25
 

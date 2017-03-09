@@ -12,6 +12,9 @@ module TUtilities
 			@store = YAML::Store.new 'TMentionWatcher.store.yaml'
 			@username = ::TUtilities::Connect.t_username
 			@client = ::TUtilities::Connect.connect_with_t
+			
+			# ensure we don't go rogue
+			self.stored_since_id = my_last_tweet.id
 		end
 
 		def stored_since_id=(val)
@@ -24,6 +27,11 @@ module TUtilities
 			@store.transaction do
 				return @store['since_id']
 			end
+		end
+
+		def my_last_tweet
+			res = client.user_timeline @username
+			res.first
 		end
 
 		# Gets the latest mentions and passes them to a block. |mention, self|

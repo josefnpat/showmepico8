@@ -41,6 +41,9 @@ def reply_with_gif_or_sadness(mention, watcher, gif)
 	end
 
 	puts status
+rescue => e
+	status = "#{tagging_text} :( it went boom\n#{e.message}"
+	watcher.client.update(status, in_reply_to_status: mention)
 end
 
 # Attempts to discern the target tweet from a given mention.

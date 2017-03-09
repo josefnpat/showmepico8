@@ -12,7 +12,7 @@ module TUtilities
 			@store = YAML::Store.new 'TMentionWatcher.store.yaml'
 			@username = ::TUtilities::Connect.t_username
 			@client = ::TUtilities::Connect.connect_with_t
-			
+
 			# ensure we don't go rogue
 			self.stored_since_id = my_last_tweet.id
 		end

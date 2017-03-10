@@ -81,7 +81,11 @@ def lua_to_temp_gif(lua)
 	output = `script -q -f -c "./recordpico8.bash"`
 
 	# Only if there wasn't a syntax error
-	unless output.include?('syntax error')
+	if output.include?('syntax error')
+		puts "@#{target_tweet.user.screen_name} syntax error :("
+	else
+		puts "@#{target_tweet.user.screen_name} gif!"
+
 		# Read the file and hopefully tweet it.
 		File.open(gif_location, 'r') { |gif| yield(gif) }
 	end

@@ -78,14 +78,28 @@ def lua_to_temp_gif(lua)
 	File.open(lua_location, 'w') { |f| f.write(lua) }
 
 	# Await the saving grace of the magic
-	`./recordpico8.bash`
+	output = `script -q -f -c "./recordpico8.bash"`
 
-	# Read the file and hopefully tweet it.
-	File.open(gif_location, 'r') { |gif| yield(gif) }
+	# Only if there wasn't a syntax error
+	unless output.include?('syntax error')
+		# Read the file and hopefully tweet it.
+		File.open(gif_location, 'r') { |gif| yield(gif) }
+	end
 
 	# PURGE
 	File.delete(gif_location)
 	File.delete(lua_location)
+end
+
+# Extracts a syntax error message from script output
+def script_output_to_syntax_error(output)
+	syntax_error = /syntax error line.*\r\n(.*)\r\nConverting/m.match(output)
+
+	return syntax_error[1] if syntax_error
+
+	return 'unidentified syntax error'
+rescue
+	return 'unidentified syntax error'
 end
 
 # This will test just the giffing

@@ -78,7 +78,7 @@ def discern_target_tweet(mention, watcher)
 	parent
 end
 
-def throw_if_obviously_bad(tweet, friendly_name, why)
+def throw_if_obviously_bad(tweet, friendly_name, why = nil)
 	context = "#{friendly_name} text started with @ (#{why})"
 	raise CancelTweetException, context if tweet.text.start_with? '@'
 	tweet

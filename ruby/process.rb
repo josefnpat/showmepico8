@@ -48,8 +48,6 @@ def reply_with_gif_or_sadness(mention, watcher, gif)
 		watcher.client.update(status, in_reply_to_status: mention)
 		puts "no gif - #{tagging_text}"
 	end
-
-	puts status
 rescue => e
 	status = "#{tagging_text} :( it went boom\n#{e.message}"
 	watcher.client.update(status, in_reply_to_status: mention)

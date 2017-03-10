@@ -1,6 +1,10 @@
 require 'htmlentities'
 require 'yaml'
 
+# Raise when the tweet should not be sent.
+class CancelTweetException < StandardError
+end
+
 # This file handles ruby-side processing of a single mention
 # Ideally it is the only file that will need to be modified
 # @param mention: The Twitter::Tweet that is mentioning you. http://www.rubydoc.info/gems/twitter/Twitter/Tweet
@@ -14,6 +18,8 @@ def handle_one_tweet(mention, watcher)
 	lua_to_temp_gif(lua) do |gif|
 		reply_with_gif_or_sadness(mention, watcher, gif)
 	end
+rescue CancelTweetException => e
+	puts "tweet canceled: #{e.message}"
 end
 
 # Constructs the tagging string with all relevant usernames
@@ -51,14 +57,26 @@ def discern_target_tweet(mention, watcher)
 	parent_id = mention.in_reply_to_status_id
 
 	# The current tweet is the target if there is no parent.
-	return mention if parent_id.is_a? Twitter::NullObject
+	if parent_id.is_a? Twitter::NullObject
+		throw_if_obviously_bad(mention)
+		return mention
+	end
 
 	parent = watcher.client.status(parent_id)
 
 	# The current tweet is the target if the parent is us.
-	return mention if parent.user.screen_name.downcase == watcher.username.downcase
+	if parent.user.screen_name.downcase == watcher.username.downcase
+		throw_if_obviously_bad(mention)
+		return mention
+	end
 
+	throw_if_obviously_bad(parent)
 	parent
+end
+
+def throw_if_obviously_bad(tweet)
+	raise CancelTweetException, 'text started with @' if tweet.text.start_with? '@'
+	tweet
 end
 
 # Gets lua from the tweet.

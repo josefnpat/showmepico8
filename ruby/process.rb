@@ -19,7 +19,8 @@ def handle_one_tweet(mention, watcher)
 		reply_with_gif_or_sadness(mention, watcher, gif)
 	end
 rescue CancelTweetException => e
-	puts "tweet canceled: #{e.message}"
+	tagging_text = build_tagging_text(mention, watcher)
+	puts "canceled - #{tagging_text} - #{e.message}"
 end
 
 # Constructs the tagging string with all relevant usernames
@@ -41,15 +42,18 @@ def reply_with_gif_or_sadness(mention, watcher, gif)
 	if gif
 		status = "🤘 #{tagging_text}"
 		watcher.client.update_with_media(status, gif, in_reply_to_status: mention)
+		puts "!!gif!! - #{tagging_text}"
 	else
 		status = "#{tagging_text} :( it went boom"
 		watcher.client.update(status, in_reply_to_status: mention)
+		puts "no gif - #{tagging_text}"
 	end
 
 	puts status
 rescue => e
 	status = "#{tagging_text} :( it went boom\n#{e.message}"
 	watcher.client.update(status, in_reply_to_status: mention)
+	puts "reply broke - #{tagging_text}"
 end
 
 # Attempts to discern the target tweet from a given mention.
@@ -98,19 +102,20 @@ def lua_to_temp_gif(lua)
 	# Await the saving grace of the magic
 	output = `script -q -f -c "./recordpico8.bash"`
 
-	# Only if there wasn't a syntax error
-	if output.include?('syntax error')
-		puts 'syntax error :('
-	else
-		puts 'gif!'
+	# Cancel if there was a syntax error
+	raise TweetCanceled, 'syntax error' if output.include?('syntax error')
 
-		# Read the file and hopefully tweet it.
-		File.open(gif_location, 'r') { |gif| yield(gif) }
-	end
+	# Read the file and hopefully tweet it.
+	File.open(gif_location, 'r') { |gif| yield(gif) }
 
 	# PURGE
 	File.delete(gif_location)
 	File.delete(lua_location)
+rescue TweetCanceled
+	# PURGE
+	File.delete(gif_location)
+	File.delete(lua_location)
+	raise
 end
 
 # Extracts a syntax error message from script output

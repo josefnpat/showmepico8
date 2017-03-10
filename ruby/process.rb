@@ -62,7 +62,7 @@ def discern_target_tweet(mention, watcher)
 
 	# The current tweet is the target if there is no parent.
 	if parent_id.is_a? Twitter::NullObject
-		throw_if_obviously_bad(mention)
+		throw_if_obviously_bad(mention, 'original', 'parent is null')
 		return mention
 	end
 
@@ -70,16 +70,17 @@ def discern_target_tweet(mention, watcher)
 
 	# The current tweet is the target if the parent is us.
 	if parent.user.screen_name.downcase == watcher.username.downcase
-		throw_if_obviously_bad(mention)
+		throw_if_obviously_bad(mention, 'original', 'parent is us')
 		return mention
 	end
 
-	throw_if_obviously_bad(parent)
+	throw_if_obviously_bad(parent, 'parent')
 	parent
 end
 
-def throw_if_obviously_bad(tweet)
-	raise CancelTweetException, 'text started with @' if tweet.text.start_with? '@'
+def throw_if_obviously_bad(tweet, friendly_name, why)
+	context = "#{friendly_name} text started with @ (#{why})"
+	raise CancelTweetException, context if tweet.text.start_with? '@'
 	tweet
 end
 

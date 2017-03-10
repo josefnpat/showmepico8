@@ -12,7 +12,7 @@ def handle_one_tweet(mention, watcher)
 	target_tweet = discern_target_tweet(mention, watcher)
 	lua = tweet_to_lua(target_tweet, watcher)
 	lua_to_temp_gif(lua) do |gif|
-		reply_with_gif_or_sadness(mention, watcher, gif)
+		# reply_with_gif_or_sadness(mention, watcher, gif)
 	end
 end
 
@@ -78,8 +78,13 @@ def lua_to_temp_gif(lua)
 	File.open(lua_location, 'w') { |f| f.write(lua) }
 
 	# Await the saving grace of the magic
-	`./recordpico8.bash`
-
+	output = `./recordpico8.bash`
+	
+	# This opens a live console. Use `output` to dump the stdout.
+	# ctrl+c and ctrl+d to exit. or `abort`
+	require 'pry'; binding.pry
+	abort
+	
 	# Read the file and hopefully tweet it.
 	File.open(gif_location, 'r') { |gif| yield(gif) }
 
